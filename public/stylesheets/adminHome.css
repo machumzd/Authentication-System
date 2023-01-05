@@ -35,6 +35,27 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
+button:hover{
+	background-color: #03dca2;
+	color:#fff;
+	border:2px solid #fff;
+}
+button{
+	width: 40%;
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #027154;
+	background: #fff;
+	font-size: 1em;
+	font-weight:bolder;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
 input{
 	width: 60%;
 	height: 20px;
