@@ -17,7 +17,9 @@ router.post('/',userController.verifyLogin,function(req,res,next){
 
 })
 router.get('/',function(req,res){
-  if(req.session.user){
+  if(req.session.admin){
+    res.redirect("/admin")
+  } else if(req.session.user){
     res.redirect('/home')
   }
 })

@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt");
 const securePassword = async (password) => {
   try {
     const passwordHash = await bcrypt.hash(password, 10);
-    console.log(password);
-    console.log(passwordHash);
     return passwordHash;
   } catch (error) {
     console.log(error.message);
@@ -35,10 +33,9 @@ const insertUser = async (req, res) => {
       res.render("index", {
         message: "your registration is completed successfully",
       });
-      console.log("registration success");
     } else {
       res.render("index", { message: "your registration is failed" });
-      console.log("registration failed");
+
     }
   } catch (error) {
     console.log(error.message);
@@ -63,8 +60,16 @@ const verifyLogin = async (req, res,next) => {
         req.session.userName=userData.name;
         req.session.userEmail=userData.email;
         req.session.userPassword=passwordMatch;
+
       if (passwordMatch) {
         req.session.user = true;
+        if(userData.is_admin==1){
+          req.session.admin=true
+          req.session.user=false
+          res.redirect("/admin")
+        }else{
+          req.session.admin=false
+        }
         res.redirect("/home");
       } else {
         req.session.user = false;

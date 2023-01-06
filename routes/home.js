@@ -5,7 +5,9 @@ var router = express.Router();
 
 
 router.get('/',function(req,res){
-    if(req.session.user){
+    if(req.session.admin){
+        res.redirect("/admin")
+    }else if(req.session.user){
         res.render('userHome',{name:req.session.userName})
     }else{
         res.render("index");
