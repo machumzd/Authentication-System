@@ -1,32 +1,46 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<title>Login Panel</title>
-	<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
+  <head>
+    <title>Login Panel</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./javascripts/validation.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true" />
 
-			<div class="signup">
-				<form >
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" >
-					<input type="email" name="email" placeholder="Email" >
-					<input type="password" name="pswd" placeholder="Password">
-					<button type="submit">Sign up</button>
-				</form>
-			</div>
+      <div class="signup">
+        <form onsubmit="validate()" action="/signup" method="post">
+          <label for="chk" aria-hidden="true">Sign up</label>
 
-			<div class="login">
-				<form action="/submit" method="post">
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email">
-					<input type="password" name="password" placeholder="Password">
-					<button type="submit">Login</button>
-				</form>
-			</div>
-	</div>
-</body>
+          <div class="error" id="nameErr"></div>
+          <input type="text" id="name" name="name" placeholder="name" />
+
+          <div class="error" id="emailErr"></div>
+          <input type="text" id="email" name="email" placeholder="Email" />
+
+          <div class="error" id="mobileErr"></div>
+          <input type="text" id="mobile" name="mobile" placeholder="Mobile" />
+
+          <div class="error" id="passErr"></div>
+          <input type="password" id="password" name="password" placeholder="Password" />
+
+          <button type="submit">Sign up</button>
+          <h4 class="message">{{message}}</h4>
+        </form>
+      </div>
+
+      <div class="login">
+        <form onsubmit="validate()" action="/submit" method="post">
+          <label for="chk" aria-hidden="true">Login</label>
+          <input type="text" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

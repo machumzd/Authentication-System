@@ -2,14 +2,16 @@ require('dotenv').config()
 var express = require('express');
 var router = express.Router();
 const session=require('express-session')
+const mongoose=require("mongoose")
+mongoose.connect("mongodb://localhost:27017/userManagement")
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
   if(req.session.admin){
    res.redirect('/admin')
   }
-  if(req.session.user){
-   res.redirect('/user')
+   if(req.session.user){
+   res.redirect('/login')
   }
 res.render("index")
 });
