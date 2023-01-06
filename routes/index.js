@@ -3,7 +3,9 @@ var express = require('express');
 var router = express.Router();
 const session=require('express-session')
 const mongoose=require("mongoose")
-mongoose.connect("mongodb://localhost:27017/userManagement")
+
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.mongo_url)
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
@@ -11,7 +13,7 @@ router.get('/', function(req, res, next) {
    res.redirect('/admin')
   }
    if(req.session.user){
-   res.redirect('/login')
+    res.redirect('/home')
   }
 res.render("index")
 });
@@ -24,10 +26,6 @@ router.post('/submit',function(req,res){
    req.session.admin=true;
    req.session.user=false;
    res.redirect("/");
- }else{
-   req.session.user=true;
-   req.session.admin=false;
-   res.redirect("/")
  }
 })
 

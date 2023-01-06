@@ -13,7 +13,7 @@
       <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div class="signup">
-        <form onsubmit="validate()" action="/signup" method="post">
+        <form onsubmit="signupValidate()" action="/signup" method="post">
           <label for="chk" aria-hidden="true">Sign up</label>
 
           <div class="error" id="nameErr"></div>
@@ -34,10 +34,15 @@
       </div>
 
       <div class="login">
-        <form onsubmit="validate()" action="/submit" method="post">
+        <form onsubmit="loginValidate()" action="/login" method="post">
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="text" name="email" placeholder="Email" />
-          <input type="password" name="password" placeholder="Password" />
+          
+          <div class="error" id="lEmailErr"></div>
+          <input type="text" id="lEmail" name="email" placeholder="Email" />
+
+            <div class="error" id="lPassErr"></div>
+          <input type="password" id="lPassword" name="password" placeholder="Password" />
+          <h4 class="logmessage">{{logmessage}}</h4>
           <button type="submit">Login</button>
         </form>
       </div>

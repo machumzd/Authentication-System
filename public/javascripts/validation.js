@@ -1,7 +1,7 @@
 function printError(elemId, hintMsg) {
   document.getElementById(elemId).innerHTML = hintMsg;
 }
-function validate() {
+function signupValidate() {
   var name = document.getElementById("name").value;
   var password = document.getElementById("password").value;
   var email = document.getElementById("email").value;
@@ -45,4 +45,29 @@ function validate() {
       printError("mobileErr", "");
     }
   }
+}
+function loginValidate(){
+    var email=document.getElementById("lEmail").value;
+    var password=document.getElementById("lPassword").value;
+
+
+
+  if (email == "") {
+    printError("lEmailErr", "Please enter your email address");
+  } else {
+    // Regular expression for basic email validation
+    var regex = /^\S+@\S+\.\S+$/;
+    if (regex.test(email) === false) {
+      printError("lEmailErr", "Please enter a valid email address");
+    } else {
+      printError("lEmailErr", "");
+    }
+  }
+
+  if (password == "") {
+    printError("lPassErr", "please enter your password");
+  } else {
+    printError("lPassErr", "");
+  }
+
 }
