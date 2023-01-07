@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <title>Login Panel</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/newUser.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+  <script src="./javascripts/validation.js"></script>
+</head>
+
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true" />
+    <div class="addUser">
+      <form action="" method="post">
+        <label for="chk" aria-hidden="true">Edit user</label>
+
+        <input type="text" id="name" value="{{user.name}}" name="name" placeholder="name" />
+
+        <input type="text" id="email" name="email" value="{{user.email}}" placeholder="Email" />
+
+        <input type="text" id="mobile" name="mobile" maxlength="10" value="{{user.mobile}}" placeholder="Mobile" />
+        <input type="hidden" id="id" name="id" value="{{user._id}}" />
+        <button>submit</button>
+
+      </form>
+    </div>
+
+    <div class="goback">
+      <form action="/admin">
+        <label for="chk" aria-hidden="true">Go back</label>
+        <h3 class="question">
+          change's not will be saved<br />are you sure you want to go back?</h3>
+        <button>Go back</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

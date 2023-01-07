@@ -11,7 +11,7 @@
 
 			<div class="adminPage">
 					<form action="/logout">
-					<label for="chk" aria-hidden="true">heii Admin welcome back to your portal</label>
+					<label for="chk" aria-hidden="true">heii Admin..<br> welcome back to your portal</label>
 					<button>logout</button>
 					</form>
 			</div>
@@ -19,11 +19,33 @@
 			<div class="users">
                 <form>
 					<label for="chk" aria-hidden="true">Users</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="text" name="search" placeholder="search" required="">
+						<a class="buttons" href="">Search</a>
+						<a class="buttons" href="/admin/newUser">Add New User</a>
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile</th>
+							<th>Actions</th>
+						</tr>
+						
+					{{#each users}}
+						<tr>
+							<td>{{name}}</td>
+							<td>{{email}}</td>
+							<td>{{mobile}}</td>
+							<td><a href="/admin/editUser?id={{_id}}">Edit</a></td>
+							<td><a href="/admin/deleteUser?id={{_id}}">Del</a></td>
+
+						</tr>
+					{{/each}}
+					
+					</table>
 				</form>
+			
 			</div>
+				
 	</div>
 </body>
 </html>
