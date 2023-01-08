@@ -46,11 +46,9 @@ function signupValidate() {
     }
   }
 }
-function loginValidate(){
-    var email=document.getElementById("lEmail").value;
-    var password=document.getElementById("lPassword").value;
-
-
+function loginValidate() {
+  var email = document.getElementById("lEmail").value;
+  var password = document.getElementById("lPassword").value;
 
   if (email == "") {
     printError("lEmailErr", "Please enter your email address");
@@ -69,5 +67,4 @@ function loginValidate(){
   } else {
     printError("lPassErr", "");
   }
-
 }

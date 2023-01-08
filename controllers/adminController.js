@@ -12,17 +12,25 @@ const securePassword = async (password) => {
   }
 };
 
-const adminDashboard = async (req, res, next) => {
+const adminDashboard = async (req, res) => {
   try {
+    var search = "";
+    if (req.query.search) {
+      search = req.query.search;
+    }
+
     const uData = await User.find({
-      is_admin: 0
-     
+      is_admin: 0,
+      $or: [
+        { name: { $regex: ".*" + search + ".*" } },
+        { email: { $regex: ".*" + search + ".*" } },
+        { mobile: { $regex: ".*" + search + ".*" } },
+      ],
     });
-    req.session.usersData = uData;
+    res.render("adminUsers", { users: uData });
   } catch (error) {
     console.log(error);
   }
-  next();
 };
 const newUserLoad = async (req, res) => {
   try {
@@ -49,10 +57,9 @@ const addUser = async (req, res) => {
     });
     const userData = await user.save();
     if (userData) {
-      console.log("new user success");
-      res.redirect("/admin");
+      res.redirect("/admin/users");
     } else {
-      res.render("newUser", { addMessage: "something Wrong" });
+      res.redirect("/admin/users");
     }
   } catch (error) {
     console.log(error.message);
@@ -83,7 +90,7 @@ const updateUsers = async (req, res) => {
         },
       }
     );
-    res.redirect("/admin");
+    res.redirect("/admin/users");
   } catch (error) {
     console.log(error.message);
   }
@@ -93,7 +100,7 @@ const deleteUser = async (req, res) => {
     const id = req.query.id;
 
     const userData = await User.deleteOne({ _id: id });
-    res.redirect("/admin");
+    res.redirect("/admin/users");
   } catch (error) {
     console.log(error.message);
   }

@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <title>AdminLoginPage</title>
+  <script src="../javascripts/validation.js"></script>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/adminLogin.css" />
+  <script src="../public/javascripts/validation.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true" />
+
+    <div class="login">
+      <form onsubmit="loginValidate()" action="/adminLogin" method="post">
+        <label for="chk" aria-hidden="true">Admin Login</label>
+
+        <div class="error" id="lEmailErr"></div>
+        <input type="text" id="lEmail" name="email" placeholder="Email" />
+
+        <div class="error" id="lPassErr"></div>
+        <input type="password" id="lPassword" name="password" placeholder="Password" />
+        <h4 class="logmessage">{{logmessage}}</h4>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div class="goback">
+      <form action="/">
+        <label for="chk" aria-hidden="true">Go back</label>
+        <h3 class="question">
+          not an'admin,you can switch to user login</h3>
+        <button class="buttons">User login</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

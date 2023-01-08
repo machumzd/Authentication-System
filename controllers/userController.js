@@ -35,7 +35,6 @@ const insertUser = async (req, res) => {
       });
     } else {
       res.render("index", { message: "your registration is failed" });
-
     }
   } catch (error) {
     console.log(error.message);
@@ -50,36 +49,69 @@ const insertUser = async (req, res) => {
 //  }
 // }
 
-const verifyLogin = async (req, res,next) => {
+const verifyLogin = async (req, res, next) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
     const userData = await User.findOne({ email: email });
     if (userData) {
       const passwordMatch = await bcrypt.compare(password, userData.password);
-        req.session.userName=userData.name;
-        req.session.userEmail=userData.email;
-        req.session.userPassword=passwordMatch;
+      req.session.userName = userData.name;
+      req.session.userEmail = userData.email;
+      req.session.userPassword = passwordMatch;
 
       if (passwordMatch) {
         req.session.user = true;
-        if(userData.is_admin==1){
-          req.session.admin=true
-          req.session.user=false
-          res.redirect("/admin")
-        }else{
-          req.session.admin=false
+        if (userData.is_admin == 1) {
+          req.session.admin = true;
+          req.session.user = false;
+          res.redirect("/admin");
+        } else {
+          req.session.admin = false;
         }
         res.redirect("/home");
       } else {
         req.session.user = false;
+        next()
       }
     } else {
       req.session.user = false;
-      next()
+      next();
     }
   } catch (error) {
     console.log(error.message);
   }
 };
-module.exports = { loadRegister, insertUser, verifyLogin};
+
+const verifyAdminLogin = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const userData = await User.findOne({ email: email });
+    if (userData) {
+      const passwordMatch = await bcrypt.compare(password, userData.password);
+      if (passwordMatch) {
+        if (userData.is_admin == 1) {
+          req.session.admin = true;
+          req.session.user = false;
+          res.redirect("/admin");
+        } else {
+          req.session.admin = false;
+          res.render("adminLogin", {
+            logmessage: "you're not an Admin(use userLogin)",
+          });
+        }
+      } else {
+        req.session.user = false;
+        res.render("adminLogin", { logmessage: "wrong credintials" });
+      }
+    } else {
+      req.session.user = false;
+      res.redirect("/adminLogin");
+      next();
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+module.exports = { loadRegister, insertUser, verifyLogin, verifyAdminLogin };

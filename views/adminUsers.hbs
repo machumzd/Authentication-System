@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>AdminPage</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/adminUser.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+
+        <div class="users">
+            <form>
+                <label for="chk" aria-hidden="true">Users</label>
+                <h4>{{usersmessage}}</h4>
+                <input type="text" name="search" placeholder="search" required />
+                <input type="submit" class="buttons" style="width:5rem" value="search">
+                <a class="buttons" href="/admin/newUser">Add New User</a>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    {{#each users}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{email}}</td>
+                        <td>{{mobile}}</td>
+                        <td><a href="/admin/editUser?id={{_id}}">Edit</a></td>
+                        <td><a href="/admin/deleteUser?id={{_id}}">Del</a></td>
+
+                    </tr>
+                    {{/each}}
+
+                </table>
+            </form>
+        </div>
+
+
+
+        <div class="goback">
+            <form action="/admin/users">
+                <label for="chk" aria-hidden="true">Go back</label>
+                <h3 class="question">
+                    changes will be saved<br />are you sure you want to go back?</h3>
+                <button>Go back</button>
+                </form>
+                <form action="/admin"><button>Home</button></form>
+            
+        </div>
+    </div>
+</body>
+
+</html>

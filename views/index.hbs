@@ -1,51 +1,55 @@
 <html>
-  <head>
-    <title>Login Panel</title>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./javascripts/validation.js"></script>
-  </head>
-  <body>
-    <div class="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
 
-      <div class="signup">
-        <form onsubmit="signupValidate()" action="/signup" method="post">
-          <label for="chk" aria-hidden="true">Sign up</label>
+<head>
+  <title>Login Panel</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+  <script src="./javascripts/validation.js"></script>
+</head>
 
-          <div class="error" id="nameErr"></div>
-          <input type="text" id="name" name="name" placeholder="name" />
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true" />
 
-          <div class="error" id="emailErr"></div>
-          <input type="text" id="email" name="email" placeholder="Email" />
 
-          <div class="error" id="mobileErr"></div>
-          <input type="text" id="mobile" name="mobile" placeholder="Mobile" />
 
-          <div class="error" id="passErr"></div>
-          <input type="password" id="password" name="password" placeholder="Password" />
+    <div class="login">
+      <form onsubmit="loginValidate()" action="/login" method="post">
+        <label for="chk" aria-hidden="true">Login</label>
 
-          <button type="submit">Sign up</button>
-          <h4 class="message">{{message}}</h4>
-        </form>
-      </div>
+        <div class="error" id="lEmailErr"></div>
+        <input type="text" id="lEmail" name="email" placeholder="Email" />
 
-      <div class="login">
-        <form onsubmit="loginValidate()" action="/login" method="post">
-          <label for="chk" aria-hidden="true">Login</label>
-          
-          <div class="error" id="lEmailErr"></div>
-          <input type="text" id="lEmail" name="email" placeholder="Email" />
-
-            <div class="error" id="lPassErr"></div>
-          <input type="password" id="lPassword" name="password" placeholder="Password" />
-          <h4 class="logmessage">{{logmessage}}</h4>
-          <button type="submit">Login</button>
-        </form>
-      </div>
+        <div class="error" id="lPassErr"></div>
+        <input type="password" id="lPassword" name="password" placeholder="Password" />
+        <h4 class="logmessage">{{logmessage}}</h4>
+        <button type="submit">Login</button>
+      </form>
     </div>
-  </body>
+
+    <div class="signup">
+      <form onsubmit="signupValidate()" action="/signup" method="post">
+        <label for="chk" aria-hidden="true">Sign up</label>
+
+        <div class="error" id="nameErr"></div>
+        <input type="text" id="name" name="name" placeholder="name" />
+
+        <div class="error" id="emailErr"></div>
+        <input type="text" id="email" name="email" placeholder="Email" />
+
+        <div class="error" id="mobileErr"></div>
+        <input type="text" id="mobile" name="mobile" placeholder="Mobile" />
+
+        <div class="error" id="passErr"></div>
+        <input type="password" id="password" name="password" placeholder="Password" />
+
+        <button type="submit">Sign up</button>
+        <h4 class="message">{{message}}</h4>
+      </form>
+    </div>
+
+
+  </div>
+</body>
+
 </html>

@@ -1,51 +1,33 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-	<title>AdminPage</title>
-	<link rel="stylesheet" type="text/css" href="../stylesheets/adminHome.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  <title>AdminPage</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/adminHome.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true" />
 
-			<div class="adminPage">
-					<form action="/logout">
-					<label for="chk" aria-hidden="true">heii Admin..<br> welcome back to your portal</label>
-					<button>logout</button>
-					</form>
-			</div>
+    <div class="welcome">
+      <form action="/logout">
+        <label for="chk" aria-hidden="true">heii Admin..<br />
+          welcome back to your portal</label>
 
-			<div class="users">
-                <form>
-					<label for="chk" aria-hidden="true">Users</label>
-					<input type="text" name="search" placeholder="search" required="">
-						<a class="buttons" href="">Search</a>
-						<a class="buttons" href="/admin/newUser">Add New User</a>
-					<table>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Mobile</th>
-							<th>Actions</th>
-						</tr>
-						
-					{{#each users}}
-						<tr>
-							<td>{{name}}</td>
-							<td>{{email}}</td>
-							<td>{{mobile}}</td>
-							<td><a href="/admin/editUser?id={{_id}}">Edit</a></td>
-							<td><a href="/admin/deleteUser?id={{_id}}">Del</a></td>
+      </form>
+    </div>
 
-						</tr>
-					{{/each}}
-					
-					</table>
-				</form>
-			
-			</div>
-				
-	</div>
+    <div class="features">
+      <form action="/admin/users">
+        <label for="chk" aria-hidden="true">Features</label>
+        <button>Your users</button>
+      </form>
+      <form action="/logout"><button>logout</button></form>
+
+    </div>
+
+  </div>
 </body>
+
 </html>

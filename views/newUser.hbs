@@ -1,42 +1,38 @@
 <html>
-  <head>
-    <title>Login Panel</title>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/newUser.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <script src="../javascripts/validation.js"></script>
-  </head>
-  <body>
-    <div class="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
-      <div class="addUser">
-        <form onsubmit="signupValidate()"action="" method="post">
-          <label for="chk" aria-hidden="true">Add user</label>
 
-          <div class="error" id="nameErr"></div>
-          <input type="text" id="name" name="name" placeholder="name" />
+<head>
+  <title>Login Panel</title>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/newUser.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+</head>
 
-          <div class="error" id="emailErr"></div>
-          <input type="text" id="email" name="email" placeholder="Email" />
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true" />
+    <div class="addUser">
+      <form  action="" method="post">
+        <label for="chk" aria-hidden="true">Add user</label>
 
-          <div class="error" id="mobileErr"></div>
-          <input type="text" id="mobile" name="mobile" maxlength="10" placeholder="Mobile" />
+        <input type="text" id="name" name="name" placeholder="name" required/>
 
-          <button type="submit">Add user</button>
-          <h4 class="message">{{Addmessage}}</h4>
-        </form>
-      </div>
+        <input type="text" id="email" name="email" placeholder="Email" required />
 
-      <div class="goback">
-        <form action="/admin">
-          <label for="chk" aria-hidden="true">Go back</label>
-          <h3 class="question">
-            change's not will be saved<br />are you sure you want to go back?</h3>
-          <button>Logout</button>
-        </form>
-      </div>
+        <input type="text" id="mobile" name="mobile" maxlength="10" placeholder="Mobile" required/>
+
+        <button>Add user</button>
+        <h4 class="message">{{Addmessage}}</h4>
+      </form>
     </div>
-  </body>
+
+    <div class="goback">
+      <form action="/admin/users">
+        <label for="chk" aria-hidden="true">Go back</label>
+        <h3 class="question">
+          change's not will be saved<br />are you sure you want to go back?</h3>
+        <button>Go back</button>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
