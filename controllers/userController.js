@@ -17,8 +17,15 @@ const loadRegister = async (req, res) => {
     console.log(error.message);
   }
 };
+
 const insertUser = async (req, res) => {
   try {
+    const uEmail=req.body.email
+    const userEmailData = await User.findOne({ email: uEmail });
+    if(userEmailData){
+      res.render("index",{message:"user aldready exists",subMessage:"please try login"})
+    }else{
+
     const spassword = await securePassword(req.body.password);
     const user = new User({
       name: req.body.name,
@@ -31,11 +38,12 @@ const insertUser = async (req, res) => {
     const userData = await user.save();
     if (userData) {
       res.render("index", {
-        message: "your registration is completed successfully",
+        message: "your registration is completed successfully",subMessage:"please try login"
       });
     } else {
       res.render("index", { message: "your registration is failed" });
     }
+  }
   } catch (error) {
     console.log(error.message);
   }
@@ -105,10 +113,11 @@ const verifyAdminLogin = async (req, res, next) => {
         req.session.user = false;
         res.render("adminLogin", { logmessage: "wrong credintials" });
       }
-    } else {
+    } else if(!userData&&email!=""&&password!=""){
+      res.render("adminLogin",{logmessage:"Wrong credintials"})
       req.session.user = false;
-      res.redirect("/adminLogin");
-      next();
+    }else{
+      req.session.user = false;
     }
   } catch (error) {
     console.log(error.message);

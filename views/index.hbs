@@ -16,7 +16,8 @@
     <div class="login">
       <form onsubmit="loginValidate()" action="/login" method="post">
         <label for="chk" aria-hidden="true">Login</label>
-
+        <h4 class="message">{{message}}</h4>
+                <h5 class="message">{{subMessage}}</h5>
         <div class="error" id="lEmailErr"></div>
         <input type="text" id="lEmail" name="email" placeholder="Email" />
 
@@ -44,7 +45,6 @@
         <input type="password" id="password" name="password" placeholder="Password" />
 
         <button type="submit">Sign up</button>
-        <h4 class="message">{{message}}</h4>
       </form>
     </div>
 
