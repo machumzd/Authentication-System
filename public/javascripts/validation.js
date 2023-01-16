@@ -47,8 +47,8 @@ function signupValidate() {
   }
 }
 function loginValidate() {
-  var email = document.getElementById("lEmail").value;
-  var password = document.getElementById("lPassword").value;
+  let email = document.getElementById("lEmail").value;
+  let password = document.getElementById("lPassword").value;
 
   if (email == "") {
     printError("lEmailErr", "Please enter your email address");

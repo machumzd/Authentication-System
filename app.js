@@ -1,20 +1,21 @@
+const dotenv=require('dotenv')
 require('dotenv').config()
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const session=require('express-session');
+const config = require('./config/config')
+const db = require('./server/database/connection')
 
-
-
-var indexRouter = require('./routes/index');
-var adminRouter = require('./routes/admin');
-var signupRouter = require('./routes/signup');
-var loginRouter = require('./routes/login');
-var homeRouter=require('./routes/home')
-var adminLoginRouter=require('./routes/adminLogin')
-var app = express();
+const indexRouter = require('./server/routes/user/index');
+const adminRouter = require('./server/routes/admin/admin');
+const signupRouter = require('./server/routes/user/signup');
+const loginRouter = require('./server/routes/user/login');
+const homeRouter=require('./server/routes/user/home')
+const adminLoginRouter=require('./server/routes/admin/adminLogin')
+const app = express();
 
 app.use(function(req, res, next) { 
   res.header('Cache-Control', 'no-cache, no-store');
@@ -22,10 +23,20 @@ app.use(function(req, res, next) {
  });
 
 app.use(session({
-  secret:process.env.secretKey,
+  secret:config.secretKey,
   cookie:{maxAge:600000}
 }));
 
+dotenv.config({ path: "config.env" })
+const PORT = process.env.PORT || 3000;
+
+db.connectToDb((err) => {
+  if (!err) {
+      app.listen(PORT, () => {
+          console.log(`listening to port ${PORT}`)
+      })
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

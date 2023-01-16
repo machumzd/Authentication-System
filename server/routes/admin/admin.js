@@ -1,11 +1,11 @@
-var express = require("express");
-var router = express.Router();
-var adminController = require("../controllers/adminController");
+const express = require("express");
+const router = express.Router();
+const adminController = require("../../controllers/adminController");
 /* GET home page. */
 
 router.get("/", function (req, res, next) {
   if (req.session.admin) {
-    res.render("adminHome");
+    res.render("admin/adminHome");
   } else {
     res.redirect("/");
   }

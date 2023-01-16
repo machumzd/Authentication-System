@@ -1,11 +1,10 @@
 require("dotenv").config();
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const session = require("express-session");
 const mongoose = require("mongoose");
-
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.mongo_url);
+
 /* GET home page. */
 
 router.get("/", function (req, res, next) {
@@ -15,7 +14,7 @@ router.get("/", function (req, res, next) {
   if (req.session.user) {
     res.redirect("/home");
   }
-  res.render("index");
+  res.render("user/index");
 });
 
 router.get("/logout", function (req, res) {

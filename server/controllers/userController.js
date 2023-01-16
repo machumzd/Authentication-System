@@ -1,4 +1,4 @@
-const User = require("../config/userModel");
+const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 
 const securePassword = async (password) => {
@@ -12,7 +12,7 @@ const securePassword = async (password) => {
 
 const loadRegister = async (req, res) => {
   try {
-    res.render("index");
+    res.render("user/index");
   } catch (error) {
     console.log(error.message);
   }
@@ -23,7 +23,7 @@ const insertUser = async (req, res) => {
     const uEmail=req.body.email
     const userEmailData = await User.findOne({ email: uEmail });
     if(userEmailData){
-      res.render("index",{message:"user aldready exists",subMessage:"please try login"})
+      res.render("user/index",{message:"user aldready exists",subMessage:"please try login"})
     }else{
 
     const spassword = await securePassword(req.body.password);
@@ -37,11 +37,11 @@ const insertUser = async (req, res) => {
 
     const userData = await user.save();
     if (userData) {
-      res.render("index", {
+      res.render("user/index", {
         message: "your registration is completed successfully",subMessage:"please try login"
       });
     } else {
-      res.render("index", { message: "your registration is failed" });
+      res.render("user/index", { message: "your registration is failed" });
     }
   }
   } catch (error) {
@@ -105,16 +105,16 @@ const verifyAdminLogin = async (req, res, next) => {
           res.redirect("/admin");
         } else {
           req.session.admin = false;
-          res.render("adminLogin", {
+          res.render("admin/adminLogin", {
             logmessage: "you're not an Admin(use userLogin)",
           });
         }
       } else {
         req.session.user = false;
-        res.render("adminLogin", { logmessage: "wrong credintials" });
+        res.render("admin/adminLogin", { logmessage: "wrong credintials" });
       }
     } else if(!userData&&email!=""&&password!=""){
-      res.render("adminLogin",{logmessage:"Wrong credintials"})
+      res.render("admin/adminLogin",{logmessage:"Wrong credintials"})
       req.session.user = false;
     }else{
       req.session.user = false;

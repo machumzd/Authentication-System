@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { request } = require("http");
-const User = require("../config/userModel");
+const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
-
+const config = require('../../config/config')
 const securePassword = async (password) => {
   try {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -12,11 +12,14 @@ const securePassword = async (password) => {
   }
 };
 
+
 const adminDashboard = async (req, res) => {
   try {
     var search = "";
     if (req.query.search) {
+      req.session.usersmessage=""
       search = req.query.search;
+      
     }
 
     const uData = await User.find({
@@ -27,14 +30,14 @@ const adminDashboard = async (req, res) => {
         { mobile: { $regex: ".*" + search + ".*" } },
       ],
     });
-    res.render("adminUsers", { users: uData });
+    res.render("admin/adminUsers", { users: uData,usersmessage:req.session.usersmessage});
   } catch (error) {
     console.log(error);
   }
 };
 const newUserLoad = async (req, res) => {
   try {
-    res.render("newUser");
+    res.render("admin/newUser");
   } catch (error) {
     console.log(error.message);
   }
@@ -45,7 +48,7 @@ const addUser = async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const mobile = req.body.mobile;
-    const password = process.env.dPassword;
+    const password = config.dPassword;
 
     const sPassword = await securePassword(password);
     const user = new User({
@@ -57,6 +60,7 @@ const addUser = async (req, res) => {
     });
     const userData = await user.save();
     if (userData) {
+      req.session.usersmessage="new user added successfully"
       res.redirect("/admin/users");
     } else {
       res.redirect("/admin/users");
@@ -65,14 +69,19 @@ const addUser = async (req, res) => {
     console.log(error.message);
   }
 };
+
+
+
+
 const editUserLoad = async (req, res) => {
   try {
     const id = req.query.id;
     const userData = await User.findById({ _id: id });
     if (userData) {
-      res.render("editUser", { user: userData });
+   
+      res.render("admin/editUser", { user: userData});
     }
-    res.render("editUser");
+    res.render("admin/editUser");
   } catch (error) {
     console.log(error.message);
   }
@@ -90,7 +99,8 @@ const updateUsers = async (req, res) => {
         },
       }
     );
-    res.redirect("/admin/users");
+    req.session.usersmessage="user updated successfully"
+    res.redirect("/admin/users",);
   } catch (error) {
     console.log(error.message);
   }
@@ -100,7 +110,11 @@ const deleteUser = async (req, res) => {
     const id = req.query.id;
 
     const userData = await User.deleteOne({ _id: id });
+    if(userData){
+      req.session.usersmessage="user deleted successfully"
     res.redirect("/admin/users");
+    }
+
   } catch (error) {
     console.log(error.message);
   }

@@ -1,18 +1,18 @@
-var express = require("express");
+const express = require("express");
 const session = require("express-session");
-const User = require("../config/userModel");
-var router = express.Router();
+const User = require("../../model/userModel");
+const router = express.Router();
 
 router.get("/", function (req, res) {
 
    if (req.session.user) {
-    res.render("userHome", { name: req.session.userName });
+    res.render("user/userHome", { name: req.session.userName });
   } 
   if (req.session.admin) {
     res.redirect("/admin");
   }
   else {
-    res.render("index");
+    res.render("user/index");
   }
 });
 
