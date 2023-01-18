@@ -31,8 +31,7 @@
                         <td>{{email}}</td>
                         <td>{{mobile}}</td>
                         <td><a href="/admin/editUser?id={{_id}}">Edit</a></td>
-                        <td><a href="/admin/deleteUser?id={{_id}}">Del</a></td>
-
+                        <td><a onclick="return  confirm('Are you sure to you want to delete')" href="/admin/deleteUser?id={{_id}}">Del</a></td>
                     </tr>
                     {{/each}}
 
